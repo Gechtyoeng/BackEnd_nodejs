@@ -60,7 +60,7 @@ export const deleteCategory = (req, res) => {
 //get articles by category
 export const getArticlesByCategory = (req, res) => {
     const categoryId = parseInt(req.params.id, 10);
-    const categoryArticles = articles.find(c => c.categoryId === categoryId);
+    const categoryArticles = articles.filter(c => c.categoryId === categoryId);
     
     if (categoryArticles.length === 0) {
         return res.status(404).json({ message: 'No articles found for this category' });
