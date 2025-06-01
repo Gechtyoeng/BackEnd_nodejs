@@ -4,7 +4,6 @@ export function logger(req, res, next){
     const path = req.path;
     const query = req.url;
     const date = new Date().toISOString();
-    console.log(`[${date}] ${method} ${path} ${query}`);
-
+    console.log(`[${date}] ${method} ${query}`);
     next();
 }

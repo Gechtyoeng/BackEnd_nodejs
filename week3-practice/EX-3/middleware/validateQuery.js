@@ -12,7 +12,7 @@ export function validateQuery(req, res, next) {
     }
 
     if (minCredits && maxCredits && parseInt(minCredits) > parseInt(maxCredits)) {
-    return res.status(400).json({ error: "minCredits cannot be greater than maxCredits" });
-  }
-  next();
+        return res.status(400).json({ error: "minCredits cannot be greater than maxCredits" });
+    }
+    next();
 }

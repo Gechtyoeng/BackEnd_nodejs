@@ -1,15 +1,14 @@
 import express from 'express';
-import {logger} from './logger.js';
-import { validateQuery } from './validateQuery.js';
-import { authToken } from './auth.js';
+import {logger} from './middleware/logger.js';
+import { validateQuery } from './middleware/validateQuery.js';
+import { authToken } from './middleware/auth.js';
 import {courses} from '../EX-2/course.js'; //import courses from EX-2
 
 const app = express();
 const PORT = 3000;
-
-app.use(logger);
-
-app.get('/departments/:dept/courses',authToken, validateQuery, (res, req)=>{
+app.use(logger);//apply logger globally
+//app.use(authToken); //for bonus
+app.get('/departments/:dept/courses',validateQuery,(req, res)=>{
     const {dept} = req.params;
     const { level, minCredits, maxCredits, semester, instructor } = req.query;
 
@@ -25,6 +24,7 @@ app.get('/departments/:dept/courses',authToken, validateQuery, (res, req)=>{
 
     res.json(filteredCourses);
 });
+
 
 //start the server
 app.listen(PORT, () => {
